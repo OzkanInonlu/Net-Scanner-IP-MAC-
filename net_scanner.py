@@ -10,20 +10,13 @@ def get_inputs():
 
 
 def broadcasting(ip_address):
-    # arp paketini olusturduk
     arp_request = scapy.ARP(pdst=ip_address)
-    # scapy icinde hangi sinifin ne yaptigini gormek icin;
-    # scapy.ls(scapy.ARP())
 
-    # modem uzerinden yayin icin
     broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
-    # scapy.ls(scapy.Ether())
 
-    combined_packet = broadcast / arp_request  # scapy dilinde bu iki paketi birlestir demek
+    combined_packet = broadcast / arp_request 
     (answered, unanswered) = scapy.srp(combined_packet,
-                                       timeout=1,verbose=True)  # timeout=1 --> cevap verilmezse bekleme yapmasin diye
-
-    # answered.show()
+                                       timeout=1,verbose=True)  
     answered.summary()
 
 
